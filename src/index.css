@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* @apply font-shoulder text-xl */
+    @apply font-lora text-base;
+    /* NOTES: *********** APPLY 2 LINES BELOW TO AVOID VERTICAL SCROLLBAR BREAK POSITIONING AND SIZING  ********** */
+    /* Use negative margin to extend <html> size (100 vw - 100% = scrollbar sized if displayed  */
+    /* Hidden horizontal scrollbar when the <html> width is extended */
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%)); 
+  }
+}
+
+@layer components {
+  .btn {
+    @apply rounded-2xl shadow-lg cursor-pointer;
+    @apply bg-primary-500 hover:bg-secondary-400 text-white text-base active:text-sm;
+    @apply flex justify-center items-center;
+    @apply gap-3 px-3 min-w-fit md:min-w-[150px] h-8 leading-8;
+  }
+
+  .btn-icon {
+    @apply cursor-pointer text-lg;
+    @apply text-primary-500 hover:text-secondary-500 active:text-base;
+  }
+
+  .btn-secondary {
+    @apply rounded-md cursor-pointer;
+    @apply  bg-tertiary-400 text-white text-sm active:text-primary-500 hover:font-bold italic;
+    @apply block whitespace-nowrap overflow-hidden text-ellipsis;
+    @apply gap-3 px-3 max-w-[150px] h-7 leading-7;
+  }
+
+  /* .title-secondary {
+    @apply cursor-pointer;
+    @apply  bg-secondary-500 text-white text-sm active:text-primary-500 hover:font-bold;
+    @apply block whitespace-nowrap overflow-hidden text-ellipsis;
+    @apply px-3 max-w-[150px] h-7 leading-7;
+  } */
+  /* .card {
+    @apply rounded-lg shadow-lg p-3 overflow-hidden border-2;
+    @apply bg-white;
+  } */
+}

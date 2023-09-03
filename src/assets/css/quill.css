@@ -1,0 +1,26 @@
+.quill {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
+
+.ql-container {
+  flex: auto;
+}
+
+.ql-editor {
+  max-height: 95vh;
+  min-height: 30vh;
+}
+
+.ql-toolbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0;
+}
+
+.ql-tooltip {
+  top: 0px !important;
+  left: 0px !important;
+}
