@@ -8,6 +8,8 @@ import { Card } from '../components/custom/Card'
 
 import { FileList } from '../components/FileList'
 import { Editor } from '../components/Editor'
+import { usePermissionChecker } from '../hooks/usePermissionChecker'
+import { Navigate, useLocation } from 'react-router-dom'
 
 const fields = [
     {
@@ -26,6 +28,7 @@ const fields = [
 ]
 
 export const Compose = () => {
+    console.log("Render Compose")
     return (
         <>
             {/* Fields: To, Cc, Bcc */}

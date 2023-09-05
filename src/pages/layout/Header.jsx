@@ -1,11 +1,32 @@
-import React, { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useState, useRef } from 'react'
 import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi'
+// import { useFetcher } from 'react-router-dom'
 
+import { useAuthContext } from '../../contexts/AuthContext'
 
 export const Header = () => {
-    const isSignedIn = true;
-    const [isCollapse, setIsCollapse] = useState(false);
-    // const { isSignedIn } = useAuthContext();
+    console.log("Render Header")
+    // const [isSignedIn, setIsSignedIn] = useState(false)
+    const [isCollapse, setIsCollapse] = useState(false)
+    const rememberRef = useRef(null)
+
+    const { isSignedIn, authorizator } = useAuthContext()
+
+    const handleButtonClick = () => {
+        if (!isSignedIn) {
+            // Sign in
+            authorizator.init(rememberRef.current.checked)
+        }
+        else {
+            if (confirm("Do you want to sign out from Google")) {
+                authorizator.revoke()
+            }
+        }
+    }
+
+    // const fetcher = useFetcher()
+
     const message = isSignedIn ? "OK! You have already signed in." : "You need to sign in with Google";
     return (
         <header>
@@ -18,20 +39,21 @@ export const Header = () => {
                         {message}
                     </p>
                     <div className='flex items-center justify-center'>
+                        {/* <fetcher.Form method='post' action='/'> */}
+                        <button className='btn' type="submit" name='auth' value={isSignedIn ? 'signout' : 'signin'}
+                            onClick={handleButtonClick}>
+                            {isSignedIn ? "Sign out" : "Sign in"}
+                        </button>
+                        {/* </fetcher.Form> */}
                         {
-                            (isSignedIn) ?
-                                (<button className='btn'>Sign out</button>)
-                                :
-                                (<>
-                                    <button className='btn'>Sign in</button>
-                                    <fieldset className="ml-4 text-xs lg:text-base">
-                                        <label className='flex items-center'>
-                                            <input type="checkbox" name="rememberMe" className='mr-1' />
-                                            Remember Me
-                                        </label>
-                                    </fieldset>
-                                </>)
+                            !isSignedIn && (
+                                <label className='flex items-center ml-4 text-xs lg:text-base'>
+                                    <input type="checkbox" name="rememberMe" className='mr-1' ref={rememberRef} />
+                                    Remember Me
+                                </label>
+                            )
                         }
+
                     </div>
                 </section>
             </div>

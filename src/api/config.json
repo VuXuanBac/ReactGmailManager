@@ -1,0 +1,8 @@
+{
+    "ClientId": "810668163370-jljh3jm138i5qebj28avr90bc2o9ab0g.apps.googleusercontent.com",
+    "APIKey": "AIzaSyCD14i_7KLK9O82_5zd5z0bPkIDLjPohRw",
+    "DiscoveryDoc": "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
+    "Scopes": [
+        "https://www.googleapis.com/auth/gmail.metadata"
+    ]
+}

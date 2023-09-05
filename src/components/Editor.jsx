@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css';
 import '../assets/css/quill.css';
@@ -37,6 +37,7 @@ const CUSTOM_QUILL = {
 export const Editor = ({ className, placeholder }) => {
     // const [value, setValue] = useState('');
     return (
-        <ReactQuill theme='snow' placeholder={placeholder} className={className} modules={CUSTOM_QUILL} />
+        <ReactQuill theme='snow' placeholder={placeholder}
+            className={className} modules={CUSTOM_QUILL} />
     );
 }

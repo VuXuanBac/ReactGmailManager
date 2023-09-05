@@ -5,14 +5,12 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import './index.css'
 
 import { Root } from './pages/layout/Root'
-import { ErrorPage } from './pages/layout/ErrorPage'
 import { Me } from './pages/layout/Me'
 
-import { Inbox } from './pages/Inbox'
-import { Sent } from './pages/Sent'
-import { Spam } from './pages/Spam'
-import { Trash } from './pages/Trash'
-import { Compose } from './pages/Compose'
+import { AuthContextProvider } from './contexts/AuthContext'
+import { ProtectedLayout } from './pages/layout/ProtectedLayout'
+
+import { NAV } from "./data/pageconfigs"
 
 const router = createBrowserRouter([
   {
@@ -20,33 +18,22 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: "me",
-        element: <Me />,
+        element: <ProtectedLayout />,
         children: [
           {
-            index: true,
-            element: <Inbox />,
+            path: "me",
+            element: <Me />,
+            errorElement: <Me />,
+            children: NAV.map(item => {
+              const Element = item.component
+              const isIndex = item.link === ""
+              return {
+                path: isIndex ? undefined : item.link,
+                index: isIndex,
+                element: <Element />,
+              }
+            })
           },
-          {
-            path: "sent",
-            element: <Sent />
-          },
-          {
-            path: "compose",
-            element: <Compose />
-          },
-          {
-            path: "spam",
-            element: <Spam />
-          },
-          {
-            path: "trash",
-            element: <Trash />
-          },
-          {
-            path: "*",
-            element: <Navigate replace to='./' />,
-          }
         ]
       },
       {
@@ -59,6 +46,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  </React.StrictMode>
 )
